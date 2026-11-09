@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101522">
+<title>LOOKMATCH — Seu estilo inteligente</title>
+<style>
+:root{--bg:#0d1220;--panel:#151d2d;--panel2:#1b2639;--line:#29364d;--text:#f1f5ff;--muted:#9ba9c0;--blue:#8eafff;--blue2:#6c8fe8;--green:#72d6ae;--yellow:#f1c66c;--red:#ff858c}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#26395f 0,transparent 40%),var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1120px;margin:auto;padding:24px 22px 50px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.brand small{color:var(--muted);letter-spacing:.19em;font-size:10px;font-weight:800}.brand h1{margin:3px 0 0;font-size:27px;letter-spacing:-1.2px}.brand h1 span{color:var(--blue)}.avatar{width:43px;height:43px;border:1px solid var(--line);background:#1c2940;border-radius:50%;display:grid;place-items:center;font-size:20px}
+.hero{border:1px solid #354768;border-radius:22px;padding:23px;background:linear-gradient(120deg,rgba(104,139,213,.22),rgba(25,37,59,.8));display:flex;align-items:center;justify-content:space-between;gap:20px}.eyebrow{font-size:10px;letter-spacing:.15em;color:var(--blue);font-weight:800}.hero h2{font-size:clamp(23px,4vw,34px);line-height:1.1;margin:8px 0}.hero p{color:#bac7dc;margin:0;max-width:580px}.hero-icon{font-size:54px;filter:drop-shadow(0 8px 20px #6c8fe855)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.stat{background:rgba(21,29,45,.9);border:1px solid var(--line);border-radius:15px;padding:13px}.stat b{display:block;font-size:23px}.stat span{font-size:11px;color:var(--muted)}
+.nav{display:flex;gap:7px;padding:6px;background:#111a2a;border:1px solid var(--line);border-radius:16px;margin:21px 0}.nav button{flex:1;background:transparent;border:0;color:var(--muted);border-radius:11px;padding:11px 7px;font-weight:650;font-size:13px}.nav button.active{background:#293a5a;color:white}
+.page{display:none}.page.active{display:block}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:5px 0 15px}.section-head h2{font-size:21px;margin:0}.section-head p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{background:rgba(21,29,45,.94);border:1px solid var(--line);border-radius:18px;padding:17px}.card h3{margin:0 0 7px;font-size:15px}.muted{color:var(--muted)}.small{font-size:12px}.btn{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:#1a263b;color:var(--text);font-weight:650;font-size:13px}.btn.primary{background:var(--blue);color:#111a2b;border-color:var(--blue);font-weight:800}.btn.ghost{background:transparent}.btn.danger{color:var(--red)}.btn:disabled{opacity:.45;cursor:not-allowed}
+label{display:block;font-size:11px;color:#bdc9dc;font-weight:750;letter-spacing:.04em;margin:0 0 6px}input,select,textarea{width:100%;border:1px solid var(--line);background:#101827;color:var(--text);border-radius:11px;padding:11px 12px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--blue)}.field{margin-bottom:13px}.row{display:flex;gap:10px}.row>*{flex:1;min-width:0}
+.pills{display:flex;gap:7px;flex-wrap:wrap}.pill{border:1px solid var(--line);border-radius:99px;padding:7px 11px;font-size:11px;color:var(--muted)}.pill.selected{background:#293c60;border-color:#6484c5;color:white}
+.item-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.item{border:1px solid var(--line);background:#111a29;border-radius:14px;overflow:hidden;position:relative}.item img{width:100%;height:130px;object-fit:cover;display:block;background:#202d42}.item .placeholder{height:130px;display:grid;place-items:center;font-size:43px;background:linear-gradient(145deg,#263954,#141e30)}.item-info{padding:9px}.item-info b{font-size:12px;display:block}.item-info span{font-size:10px;color:var(--muted)}.remove{position:absolute;top:7px;right:7px;background:#101827dd;color:white;border:1px solid #ffffff33;border-radius:50%;width:27px;height:27px}
+.look-pieces{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0}.piece-chip{background:#101827;border:1px solid var(--line);border-radius:13px;padding:13px 17px;text-align:center;min-width:90px}.piece-chip .emoji{font-size:29px;display:block}.score{font-size:42px;font-weight:850;letter-spacing:-2px;color:var(--green)}.meter{height:8px;background:#293449;border-radius:20px;overflow:hidden;margin:8px 0 14px}.meter span{height:100%;display:block;background:linear-gradient(90deg,#6d91e8,#8fd9c0);border-radius:20px}
+.notice{border:1px solid #66532b;background:#302919;color:#f2d89d;border-radius:12px;padding:12px;font-size:12px}.success{border-color:#285d4b;background:#142d27;color:#a5e7cd}.warning{border-color:#66532b;background:#302919;color:#f2d89d}.bad{border-color:#69343c;background:#311c25;color:#ffb2b5}
+.result-row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:12px}.result-row:last-child{border:0}.tag{font-size:10px;font-weight:800;border-radius:99px;padding:4px 8px;background:#25344d;color:#b9ccf4}
+.weather-box{display:flex;align-items:center;gap:12px;background:#101827;border:1px solid var(--line);padding:12px;border-radius:13px}.weather-icon{font-size:30px}
+.saved-look{display:flex;flex-direction:column;gap:12px;padding:14px;border:1px solid var(--line);border-radius:16px;margin-top:12px;background:rgba(18,29,47,.62)}
+.saved-look-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.saved-look-title{display:flex;flex-direction:column;gap:5px;min-width:0}
+.saved-look-title b{font-size:14px;line-height:1.4}
+.saved-look-preview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.saved-piece{height:138px;overflow:hidden;border-radius:11px;background:#101827;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.saved-piece img{width:100%;height:100%;object-fit:cover}
+.saved-piece .fallback{font-size:30px}
+.saved-remove{border:1px solid #70404a;background:#301e29;color:#ffc2ca;border-radius:10px;padding:8px 11px;font-weight:700;cursor:pointer;white-space:nowrap}
+.saved-remove:hover{background:#482632}
+@media(max-width:480px){.saved-piece{height:105px}.saved-remove{font-size:11px;padding:7px 9px}}
+.empty{padding:28px 15px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:15px;font-size:13px}
+footer{text-align:center;color:var(--muted);font-size:11px;margin-top:27px}
+@media(max-width:680px){.app{padding:17px 14px 35px}.hero{padding:18px}.hero-icon{font-size:40px}.grid{grid-template-columns:1fr}.item-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.nav button{font-size:11px;padding:10px 3px}.card{padding:14px}.section-head{align-items:start;flex-direction:column}}
+
+/* Provador visual com manequim */
+.builder-layout{display:grid;grid-template-columns:minmax(250px,.9fr) minmax(300px,1.1fr);gap:16px;margin-top:14px}
+.closet-picker,.mannequin-panel{background:#101827;border:1px solid var(--line);border-radius:16px;padding:13px;min-width:0}
+.picker-title,.mannequin-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:11px}
+.category-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin}
+.category-tab{white-space:nowrap;border:1px solid var(--line);border-radius:99px;padding:8px 11px;background:#172237;color:var(--muted);font-size:11px}
+.category-tab.active{background:#30466d;border-color:#7898dc;color:white}
+.closet-shelf{display:flex;gap:9px;overflow-x:auto;min-height:190px;padding:4px 2px 10px;scroll-snap-type:x mandatory}
+.closet-option{flex:0 0 126px;scroll-snap-align:start;border:1px solid var(--line);background:#182338;border-radius:13px;overflow:hidden;color:var(--text);text-align:left;padding:0}
+.closet-option.selected{border:2px solid var(--green);box-shadow:0 0 0 2px #72d6ae22}
+.closet-option img,.closet-option .option-placeholder{width:100%;height:126px;object-fit:cover;display:grid;place-items:center;background:linear-gradient(145deg,#2a3b59,#141e30);font-size:38px}
+.closet-option b{display:block;padding:7px 8px 1px;font-size:11px}
+.closet-option small{display:block;padding:0 8px 8px;color:var(--muted);font-size:10px}
+.mannequin-stage{height:430px;max-width:350px;margin:8px auto 5px;position:relative;display:flex;justify-content:center;align-items:center;background:radial-gradient(ellipse,#293b5b 0%,#17243a 50%,#101827 75%);border:1px solid #344665;border-radius:18px;overflow:hidden}
+.mannequin-body{height:95%;width:auto;max-width:90%;filter:drop-shadow(0 8px 14px #0006)}
+.mannequin-slot{position:absolute;display:grid;place-items:center;overflow:hidden;border:1px dashed #8fa8d455;background:#17243a66;color:#b8c9e8;border-radius:12px}
+.mannequin-slot img{width:100%;height:100%;object-fit:contain;mix-blend-mode:normal}
+.mannequin-slot span{font-size:26px;opacity:.5}
+.slot-top{width:43%;height:28%;top:23%;left:28.5%}
+.slot-bottom{width:39%;height:39%;top:49%;left:30.5%}
+.slot-shoes{width:48%;height:11%;bottom:2%;left:26%}
+.slot-accessory{width:24%;height:13%;top:17%;right:8%}
+.selected-pieces{display:flex;flex-wrap:wrap;gap:6px;min-height:27px;margin:9px 0}
+.selected-chip{font-size:10px;background:#1d2d47;border:1px solid var(--line);border-radius:99px;padding:5px 8px;color:#dce7ff}
+.mannequin-actions{display:flex;gap:8px}.mannequin-actions button{flex:1}
+.builder-hidden-fields{display:none}
+@media(max-width:760px){.builder-layout{grid-template-columns:1fr}.mannequin-stage{height:390px}.closet-shelf{min-height:175px}.closet-option{flex-basis:118px}}
+
+.match-rails{display:grid;gap:12px;margin-top:16px}
+.match-rail{background:#101827;border:1px solid var(--line);border-radius:16px;padding:12px;min-width:0}
+.rail-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rail-head b{display:block;font-size:14px}.rail-head small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+.rail-status{font-size:10px;color:var(--blue);border:1px solid #536b9a;border-radius:99px;padding:5px 9px;white-space:nowrap}
+.rail-status.locked{color:var(--green);border-color:#4a9e80;background:#16352f}
+.rail-cards{display:flex;gap:9px;overflow-x:auto;padding:12px 2px 9px;scroll-snap-type:x mandatory;min-height:145px}
+.rail-card{flex:0 0 116px;scroll-snap-align:start;border:1px solid var(--line);background:#182338;border-radius:12px;overflow:hidden;color:var(--text);text-align:left;padding:0;opacity:.88}
+.rail-card.chosen{border:2px solid var(--blue);opacity:1;box-shadow:0 0 0 2px #8eafff22}
+.rail-card.frozen{border:2px solid var(--green);box-shadow:0 0 0 2px #72d6ae22}
+.rail-card img,.rail-card .option-placeholder{width:100%;height:103px;object-fit:cover;display:grid;place-items:center;background:linear-gradient(145deg,#2a3b59,#141e30);font-size:34px}
+.rail-card b{display:block;padding:6px 7px 1px;font-size:11px}.rail-card small{display:block;padding:0 7px 7px;color:var(--muted);font-size:10px}
+.rail-actions{display:flex;gap:8px}.rail-actions button{font-size:12px;padding:8px 12px}.rail-unlock{margin-left:auto}
+.mannequin-stage{max-width:330px}
+@media(max-width:600px){.rail-card{flex-basis:108px}.rail-card img,.rail-card .option-placeholder{height:94px}.rail-head b{font-size:13px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="brand"><small>YOUR PERSONAL STYLE ASSISTANT</small><h1>LOOK<span>MATCH</span> ✦</h1></div><div class="avatar">🪞</div></header>
+<section class="hero"><div><div class="eyebrow">ESTILO + CONTEXTO + INTELIGÊNCIA</div><h2>Vista-se bem.<br>Para o lugar certo.</h2><p>Organize seu closet, encontre combinações e confira se o look combina com a ocasião antes de sair.</p></div><div class="hero-icon">✨</div></section>
+<div class="stats"><div class="stat"><b id="statPieces">0</b><span>Peças no closet</span></div><div class="stat"><b id="statLooks">0</b><span>Looks salvos</span></div><div class="stat"><b id="statMatches">0</b><span>Matches favoritos</span></div></div>
+<nav class="nav">
+<button class="active" data-tab="home">⌂ Início</button><button data-tab="closet">▦ Meu closet</button><button data-tab="match">♡ Match</button><button data-tab="context">📍 Destino</button><button data-tab="saved">✦ Favoritos</button>
+</nav>
+<main>
+<section class="page active" id="home">
+<div class="section-head"><div><h2>Seu painel</h2><p>Seu próximo look começa aqui.</p></div><button class="btn primary" data-go="context">Planejar saída →</button></div>
+<div class="grid">
+<div class="card"><div class="eyebrow">DESTINO CONFIGURADO</div><h3 id="homeDestination" style="font-size:20px;margin-top:7px">🛍️ Shopping</h3><p class="small muted" id="homeOccasion">Evento especial • Formal</p><div class="weather-box" style="margin-top:14px"><div class="weather-icon">🌤️</div><div><b class="small" id="homeWeather">Clima a consultar</b><div class="small muted" id="homeCity">Informe uma cidade na aba Destino</div></div></div><button class="btn" style="width:100%;margin-top:12px" data-go="context">Editar contexto</button></div>
+<div class="card"><div class="eyebrow">COMECE POR AQUI</div><h3 style="font-size:20px;margin-top:7px">Seu closet digital</h3><p class="small muted">Adicione fotos das suas roupas para receber combinações usando suas próprias peças.</p><button class="btn primary" style="width:100%;margin-top:13px" data-go="closet">Adicionar roupas</button></div>
+</div>
+<div class="card" style="margin-top:14px"><h3>Como o LOOKMATCH avalia?</h3><div class="result-row"><span>🎨 Harmonia de cores e peças</span><span class="tag">Estilo</span></div><div class="result-row"><span>📍 Adequação ao local e ocasião</span><span class="tag">Contexto</span></div><div class="result-row"><span>🌦️ Clima no horário do evento</span><span class="tag">Conforto</span></div><div class="result-row"><span>👔 Dress code e formalidade</span><span class="tag">Etiqueta</span></div><p class="small muted" style="margin:12px 0 0">O sistema deve separar exigências reais do evento de preferências estéticas. Se faltar informação, pergunta antes de reprovar um look.</p></div>
+</section>
+<section class="page" id="closet">
+<div class="section-head"><div><h2>Meu guarda-roupa</h2><p>Cadastre suas peças com foto, cor e categoria.</p></div></div>
+<div class="card">
+<div class="row"><div class="field"><label for="clothName">NOME DA PEÇA</label><input id="clothName" placeholder="Ex.: Camisa social azul"></div><div class="field"><label for="clothCategory">CATEGORIA</label><select id="clothCategory"><option>Camisa</option><option>Camiseta / Blusa</option><option>Calça</option><option>Bermuda</option><option>Saia</option><option>Vestido</option><option>Jaqueta / Casaco</option><option>Tênis</option><option>Sapato social</option><option>Acessório</option></select></div></div>
+<div class="row"><div class="field"><label for="clothColor">COR PRINCIPAL</label><input id="clothColor" placeholder="Ex.: Preto"></div><div class="field"><label for="clothStyle">ESTILO</label><select id="clothStyle"><option>Casual</option><option>Social</option><option>Esportivo</option><option>Elegante</option><option>Urbano</option><option>Básico</option></select></div></div>
+<div class="field"><label for="clothPhoto">FOTO DA PEÇA</label><input id="clothPhoto" type="file" accept="image/*"></div>
+<button class="btn primary" id="addCloth">＋ Adicionar ao closet</button>
+<p class="small muted" style="margin:10px 0 0">As fotos ficam nesta sessão do navegador. Esta versão não envia suas imagens para um servidor.</p>
+</div>
+<div class="section-head" style="margin-top:20px"><div><h2>Suas peças</h2><p id="closetCount">Nenhuma peça cadastrada ainda.</p></div><button class="btn ghost" id="clearCloset">Limpar closet</button></div>
+<div class="item-grid" id="closetGrid"><div class="empty" style="grid-column:1/-1">Seu closet está esperando pelas primeiras peças. 📸</div></div>
+</section>
+<section class="page" id="match">
+<div class="section-head"><div><h2>Central de match ♡</h2><p>Monte um look ou avalie uma foto completa.</p></div></div>
+<div class="grid">
+<div class="card wardrobe-builder"><h3>💘 Monte seu look — Match por etapas</h3><p class="small muted">Escolha uma peça em cada sessão. Quando encontrar uma que goste, aperte MATCH para congelá-la e continue procurando as outras.</p>
+<div class="match-rails">
+ <section class="match-rail" data-rail="top"><div class="rail-head"><div><b>01 · Camisa / parte de cima</b><small>Deslize para explorar seu closet</small></div><span class="rail-status" id="statusTop">Em busca</span></div><div class="rail-cards" id="railTop"></div><div class="rail-actions"><button class="btn primary rail-match" data-lock="top">♥ Match nesta peça</button><button class="btn ghost rail-unlock" data-unlock="top" hidden>Trocar peça</button></div></section>
+ <section class="match-rail" data-rail="bottom"><div class="rail-head"><div><b>02 · Calça / short</b><small>Encontre a parte de baixo ideal</small></div><span class="rail-status" id="statusBottom">Em busca</span></div><div class="rail-cards" id="railBottom"></div><div class="rail-actions"><button class="btn primary rail-match" data-lock="bottom">♥ Match nesta peça</button><button class="btn ghost rail-unlock" data-unlock="bottom" hidden>Trocar peça</button></div></section>
+ <section class="match-rail" data-rail="shoes"><div class="rail-head"><div><b>03 · Tênis / calçado</b><small>Complete a combinação</small></div><span class="rail-status" id="statusShoes">Em busca</span></div><div class="rail-cards" id="railShoes"></div><div class="rail-actions"><button class="btn primary rail-match" data-lock="shoes">♥ Match nesta peça</button><button class="btn ghost rail-unlock" data-unlock="shoes" hidden>Trocar peça</button></div></section>
+</div>
+<div class="mannequin-panel" style="margin-top:16px"><div class="mannequin-heading"><b>Seu look no manequim</b><span class="tag">PRÉVIA</span></div>
+<div class="mannequin-stage" id="mannequinStage"><svg class="mannequin-body" viewBox="0 0 260 500" role="img" aria-label="Manequim virtual"><defs><linearGradient id="bodyGrad" x1="0" x2="1"><stop stop-color="#dce5f6"/><stop offset=".5" stop-color="#8799b8"/><stop offset="1" stop-color="#dce5f6"/></linearGradient></defs><circle cx="130" cy="54" r="35" fill="url(#bodyGrad)" opacity=".92"/><path d="M108 91 Q75 96 55 121 L25 213 Q22 228 38 233 L52 237 L78 163 L82 257 L91 365 L78 474 Q76 490 92 490 L111 490 L130 385 L149 490 L168 490 Q184 490 182 474 L169 365 L178 257 L182 163 L208 237 L222 233 Q238 228 235 213 L205 121 Q185 96 152 91Z" fill="url(#bodyGrad)" opacity=".92" stroke="#dce5f6" stroke-opacity=".35"/></svg>
+<div class="mannequin-slot slot-top" id="slotTop"><span>👕</span></div><div class="mannequin-slot slot-bottom" id="slotBottom"><span>👖</span></div><div class="mannequin-slot slot-shoes" id="slotShoes"><span>👟</span></div>
+</div><div class="selected-pieces" id="selectedPieces"><span class="small muted">Escolha suas peças nas três sessões.</span></div>
+<div class="mannequin-actions"><button class="btn ghost" id="clearBuilder">Recomeçar</button><button class="btn primary" id="analyzeCombo">✦ Analisar compatibilidade</button></div><div id="comboResult" style="margin-top:13px"></div></div>
+<div class="builder-hidden-fields" aria-hidden="true"><select id="topPiece"><option value="">Selecione uma peça</option></select><select id="bottomPiece"><option value="">Selecione uma peça</option></select><select id="shoePiece"><option value="">Selecione uma peça</option></select><select id="accessoryPiece"><option value="">Nenhum</option></select></div></div>
+<div class="card"><h3>📸 Avaliar look completo</h3><p class="small muted">Envie uma foto do visual que está pensando em usar.</p>
+<div class="field"><label for="fullLookPhoto">FOTO DO LOOK</label><input id="fullLookPhoto" type="file" accept="image/*"></div><img id="fullLookPreview" alt="Prévia do look" style="display:none;width:100%;max-height:250px;object-fit:contain;border-radius:12px;background:#101827">
+<p class="small muted" style="margin-top:12px">A avaliação automática real da imagem requer integração com um modelo de visão. Por enquanto, a foto serve como referência visual e você pode preencher as peças no closet para a análise de compatibilidade.</p>
+<button class="btn" id="usePhoto" style="width:100%">Registrar foto para avaliação</button><div class="small muted" id="photoStatus" style="margin-top:8px"></div>
+</div></div>
+<div class="card" style="margin-top:14px"><h3>Contexto que será usado</h3><div id="matchContext" class="small muted">Shopping • Evento especial • Formal • Clima a consultar</div><button class="btn" style="margin-top:10px" data-go="context">Alterar destino</button></div>
+</section>
+<section class="page" id="context">
+<div class="section-head"><div><h2>Destino e ocasião</h2><p>O look precisa fazer sentido para o lugar onde você vai.</p></div></div>
+<div class="card">
+<div class="field"><label for="place">LOCAL</label><select id="place"><option>Shopping</option><option>Faculdade</option><option>Trabalho</option><option>Restaurante</option><option>Festa / Balada</option><option>Academia</option><option>Casamento</option><option>Praia</option><option>Evento formal</option><option>Outro</option></select></div>
+<div class="field"><label for="occasion">OCASIÃO</label><select id="occasion"><option>Evento especial</option><option>Encontro</option><option>Passeio com amigos</option><option>Compromisso profissional</option><option>Atividade cotidiana</option><option>Comemoração</option></select></div>
+<div class="field"><label for="dresscode">FORMALIDADE / DRESS CODE</label><select id="dresscode"><option>Formal</option><option>Social</option><option>Esporte fino</option><option>Casual</option><option>Não sei / preciso de ajuda</option></select></div>
+<div class="field"><label for="eventDetail">DETALHES DO EVENTO (OPCIONAL)</label><input id="eventDetail" placeholder="Ex.: aniversário, jantar, inauguração..."></div>
+<div class="row"><div class="field"><label for="city">CIDADE PARA CONSULTAR O CLIMA</label><input id="city" placeholder="Ex.: Sarandi, PR"></div><div class="field"><label for="eventDate">DATA DO EVENTO</label><input id="eventDate" type="date"></div></div>
+<div class="row"><div class="field"><label for="eventTime">HORÁRIO</label><input id="eventTime" type="time" value="19:00"></div><div class="field"><label for="weatherPreference">PREFERÊNCIA DE CLIMA</label><select id="weatherPreference"><option>Consultar previsão</option><option>Quente</option><option>Frio</option><option>Chuvoso</option><option>Ameno</option></select></div></div>
+<button class="btn primary" id="saveContext">Salvar contexto</button>
+<button class="btn" id="getWeather">Consultar previsão do tempo</button>
+<div id="weatherResult" style="margin-top:12px"></div>
+<p class="small muted" style="margin:12px 0 0">A consulta meteorológica usa a previsão pública Open-Meteo e depende de conexão com a internet. Para datas muito distantes, a previsão pode não estar disponível.</p>
+</div>
+<div class="card" style="margin-top:14px"><h3>Como interpretamos o ambiente</h3><p class="small muted">Um shopping, por si só, não exige roupa casual. O sistema considera a ocasião e o dress code informado, e pode pedir detalhes sobre o evento para evitar conclusões precipitadas.</p></div>
+</section>
+<section class="page" id="saved">
+<div class="section-head"><div><h2>Meus looks favoritos ✦</h2><p>Combinações que receberam seu match.</p></div></div><div id="savedList"><div class="empty">Seus looks favoritos aparecerão aqui.</div></div>
+</section>
+</main>
+<footer>LOOKMATCH · Seu estilo, suas regras, seu match.<br>Protótipo funcional local — ainda não conectado a uma IA de análise visual.</footer>
+</div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const state={clothes:[],saved:[],weather:null,context:{place:'Shopping',occasion:'Evento especial',dresscode:'Formal',city:'',date:'',time:'19:00',detail:'',weatherPreference:'Consultar previsão'}};
+const emojis={'Camisa':'👔','Camiseta / Blusa':'👕','Calça':'👖','Bermuda':'🩳','Saia':'👗','Vestido':'👗','Jaqueta / Casaco':'🧥','Tênis':'👟','Sapato social':'👞','Acessório':'🕶️'};
+function page(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));if(id==='match')renderSelects();}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>page(b.dataset.tab));
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>page(b.dataset.go));
+function updateStats(){$('statPieces').textContent=state.clothes.length;$('statLooks').textContent=state.saved.length;$('statMatches').textContent=state.saved.length;$('closetCount').textContent=state.clothes.length+' peça(s) cadastrada(s).';}
+function renderCloset(){let grid=$('closetGrid');grid.innerHTML='';if(!state.clothes.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1">Seu closet está esperando pelas primeiras peças. 📸</div>';return;}state.clothes.forEach((c,i)=>{let el=document.createElement('article');el.className='item';if(c.photo){let img=document.createElement('img');img.src=c.photo;img.alt=c.name;el.append(img);}else{let ph=document.createElement('div');ph.className='placeholder';ph.textContent=emojis[c.category]||'👕';el.append(ph);}let info=document.createElement('div');info.className='item-info';let b=document.createElement('b');b.textContent=c.name;let s=document.createElement('span');s.textContent=c.category+' · '+c.color+' · '+c.style;info.append(b,s);let del=document.createElement('button');del.className='remove';del.textContent='×';del.title='Remover peça';del.onclick=()=>{state.clothes.splice(i,1);renderCloset();renderSelects();};el.append(info,del);grid.append(el);});}
+$('addCloth').onclick=()=>{let name=$('clothName').value.trim();if(!name){alert('Informe o nome da peça.');return;}let file=$('clothPhoto').files[0];const add=photo=>{state.clothes.push({name,category:$('clothCategory').value,color:$('clothColor').value.trim()||'Não informada',style:$('clothStyle').value,photo});$('clothName').value='';$('clothColor').value='';$('clothPhoto').value='';renderCloset();renderSelects();updateStats();};if(file){let r=new FileReader();r.onload=()=>add(r.result);r.readAsDataURL(file);}else add('');};
+$('clearCloset').onclick=()=>{if(confirm('Remover todas as peças cadastradas?')){state.clothes=[];renderCloset();renderSelects();updateStats();}};
+function renderSelects(){[['topPiece',['Camisa','Camiseta / Blusa','Jaqueta / Casaco','Vestido']],['bottomPiece',['Calça','Bermuda','Saia']],['shoePiece',['Tênis','Sapato social']],['accessoryPiece',['Acessório']]].forEach(([id,cats])=>{let sel=$(id),old=sel.value;sel.innerHTML=id==='accessoryPiece'?'<option value="">Nenhum</option>':'<option value="">Selecione uma peça</option>';state.clothes.forEach((c,i)=>{if(cats.includes(c.category)){let o=document.createElement('option');o.value=i;o.textContent=c.name+' ('+c.color+')';sel.append(o);}});if(old)sel.value=old;});if($('builderShelf')){renderBuilder();renderMannequin();}}
+
+const builderCategories={
+ top:{cats:['Camisa','Camiseta / Blusa','Jaqueta / Casaco','Vestido'],select:'topPiece',slot:'slotTop',icon:'👕',rail:'railTop',status:'statusTop',key:'top'},
+ bottom:{cats:['Calça','Bermuda','Saia'],select:'bottomPiece',slot:'slotBottom',icon:'🩳',rail:'railBottom',status:'statusBottom',key:'bottom'},
+ shoes:{cats:['Tênis','Sapato social'],select:'shoePiece',slot:'slotShoes',icon:'👟',rail:'railShoes',status:'statusShoes',key:'shoes'}
+};
+let frozenPieces={top:false,bottom:false,shoes:false};
+function renderBuilder(){
+ Object.values(builderCategories).forEach(cfg=>{
+  const rail=$(cfg.rail);rail.innerHTML='';
+  const options=state.clothes.map((c,i)=>({c,i})).filter(x=>cfg.cats.includes(x.c.category));
+  if(!options.length){rail.innerHTML='<div class="empty" style="min-width:100%">Nenhuma peça desta categoria cadastrada ainda. 💙</div>';}
+  options.forEach(({c,i})=>{
+   const b=document.createElement('button');b.type='button';
+   const chosen=$(cfg.select).value===String(i);
+   b.className='rail-card'+(chosen?' chosen':'')+(frozenPieces[cfg.key]&&chosen?' frozen':'');
+   if(c.photo){const img=document.createElement('img');img.src=c.photo;img.alt=c.name;b.append(img);}
+   else{const ph=document.createElement('div');ph.className='option-placeholder';ph.textContent=emojis[c.category]||cfg.icon;b.append(ph);}
+   const name=document.createElement('b');name.textContent=c.name;const meta=document.createElement('small');meta.textContent=(c.color||'')+' · '+(c.style||'');b.append(name,meta);
+   b.disabled=frozenPieces[cfg.key];
+   b.onclick=()=>{if(frozenPieces[cfg.key])return;$(cfg.select).value=String(i);$('comboResult').innerHTML='';renderBuilder();renderMannequin();};
+   rail.append(b);
+  });
+  const locked=frozenPieces[cfg.key],status=$(cfg.status);
+  status.textContent=locked?'♥ Match congelado':($(cfg.select).value!==''?'Peça selecionada':'Em busca');
+  status.classList.toggle('locked',locked);
+  const lockBtn=document.querySelector('[data-lock="'+cfg.key+'"]'),unlockBtn=document.querySelector('[data-unlock="'+cfg.key+'"]');
+  lockBtn.hidden=locked;lockBtn.disabled=$(cfg.select).value==='';
+  unlockBtn.hidden=!locked;
+ });
+}
+function renderMannequin(){
+ Object.entries(builderCategories).forEach(([key,cfg])=>{
+  const slot=$(cfg.slot),value=$(cfg.select).value;slot.innerHTML='';
+  if(value!==''&&state.clothes[Number(value)]){
+   const piece=state.clothes[Number(value)];
+   if(piece.photo){const img=document.createElement('img');img.src=piece.photo;img.alt=piece.name;slot.append(img);}
+   else{const span=document.createElement('span');span.textContent=emojis[piece.category]||cfg.icon;slot.append(span);}
+  }else{const span=document.createElement('span');span.textContent=cfg.icon;slot.append(span);}
+ });
+ const chosen=Object.values(builderCategories).map(cfg=>$(cfg.select).value).filter(v=>v!=='').map(v=>state.clothes[Number(v)]);
+ $('selectedPieces').innerHTML=chosen.length?chosen.map(p=>'<span class="selected-chip">'+p.name+'</span>').join(''):'<span class="small muted">Escolha suas peças nas três sessões.</span>';
+}
+document.querySelectorAll('[data-lock]').forEach(btn=>btn.addEventListener('click',()=>{
+ const key=btn.dataset.lock,cfg=builderCategories[key];
+ if($(cfg.select).value==='')return;
+ frozenPieces[key]=true;$('comboResult').innerHTML='';
+ renderBuilder();renderMannequin();
+}));
+document.querySelectorAll('[data-unlock]').forEach(btn=>btn.addEventListener('click',()=>{
+ const key=btn.dataset.unlock;frozenPieces[key]=false;renderBuilder();renderMannequin();
+}));
+$('clearBuilder').onclick=()=>{Object.values(builderCategories).forEach(cfg=>$(cfg.select).value='');frozenPieces={top:false,bottom:false,shoes:false};$('comboResult').innerHTML='';renderBuilder();renderMannequin();};
+function saveContext(){state.context={place:$('place').value,occasion:$('occasion').value,dresscode:$('dresscode').value,city:$('city').value.trim(),date:$('eventDate').value,time:$('eventTime').value,detail:$('eventDetail').value.trim(),weatherPreference:$('weatherPreference').value};let c=state.context;$('homeDestination').textContent='📍 '+c.place;$('homeOccasion').textContent=c.occasion+' • '+c.dresscode;$('homeCity').textContent=c.city||'Informe uma cidade na aba Destino';$('homeWeather').textContent=state.weather?state.weather.summary:'Clima a consultar';$('matchContext').textContent=c.place+' • '+c.occasion+' • '+c.dresscode+' • '+(state.weather?state.weather.summary:'Clima a consultar');}
+$('saveContext').onclick=()=>{saveContext();alert('Contexto salvo!');page('home');};
+const weatherCodes={0:'Céu limpo',1:'Predominantemente limpo',2:'Parcialmente nublado',3:'Nublado',45:'Neblina',48:'Neblina com geada',51:'Garoa leve',53:'Garoa moderada',55:'Garoa intensa',61:'Chuva leve',63:'Chuva moderada',65:'Chuva forte',71:'Neve leve',73:'Neve moderada',75:'Neve forte',80:'Pancadas leves',81:'Pancadas moderadas',82:'Pancadas fortes',95:'Trovoadas',96:'Trovoadas e granizo',99:'Trovoadas fortes'};
+$('getWeather').onclick=async()=>{let city=$('city').value.trim();if(!city){alert('Informe a cidade para consultar o clima.');return;}let box=$('weatherResult');box.textContent='Consultando previsão…';try{let geo=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(city)+'&count=1&language=pt&format=json').then(r=>r.json());if(!geo.results?.length)throw Error('Cidade não encontrada.');let loc=geo.results[0];let date=$('eventDate').value;let url='https://api.open-meteo.com/v1/forecast?latitude='+loc.latitude+'&longitude='+loc.longitude+'&current=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto';let data=await fetch(url).then(r=>r.json());let idx=date?data.daily.time.indexOf(date):0;if(idx<0)throw Error('Previsão indisponível para essa data.');let tempMin=data.daily.temperature_2m_min[idx],tempMax=data.daily.temperature_2m_max[idx],rain=data.daily.precipitation_probability_max[idx],code=data.daily.weather_code[idx];let summary=(weatherCodes[code]||'Condição variável')+' · '+tempMin+'–'+tempMax+'°C';state.weather={summary,city:loc.name,min:tempMin,max:tempMax,rain};box.innerHTML='<div class="weather-box"><div class="weather-icon">🌦️</div><div><b>'+summary+'</b><div class="small muted">'+loc.name+' · chance de chuva: '+rain+'%</div></div></div><p class="small muted">Use essa previsão como apoio. Consulte novamente perto do evento, pois o tempo pode mudar.</p>';saveContext();}catch(e){box.textContent='Não foi possível consultar: '+e.message+' Verifique a cidade e sua conexão.';}};
+$('fullLookPhoto').onchange=e=>{let f=e.target.files[0];if(!f)return;let img=$('fullLookPreview');img.src=URL.createObjectURL(f);img.style.display='block';$('photoStatus').textContent='Foto carregada localmente. A análise visual automática ainda requer integração com IA.';};
+$('usePhoto').onclick=()=>{$('photoStatus').textContent=$('fullLookPhoto').files.length?'Foto selecionada para referência. Para uma análise real, conecte um serviço de IA visual.':'Selecione uma foto primeiro.';};
+$('analyzeCombo').onclick=()=>{let ids=['topPiece','bottomPiece','shoePiece','accessoryPiece'].map(x=>$(x).value);if(ids.slice(0,3).some(x=>x==='')){alert('Escolha uma peça em cada uma das três sessões: parte de cima, parte de baixo e calçado.');return;}let pieces=ids.filter(x=>x!=='').map(x=>state.clothes[Number(x)]);let c=state.context;let formal=pieces.filter(x=>['Social','Elegante'].includes(x.style)||['Camisa','Sapato social'].includes(x.category)).length;let informal=pieces.filter(x=>['Esportivo'].includes(x.style)||['Camiseta / Blusa','Bermuda'].includes(x.category)||x.category==='Tênis').length;let level=c.dresscode;let score=75;let reasons=[];if(level==='Formal'){if(formal>=2){score+=12;reasons.push('As peças sociais ajudam a atender à formalidade informada.');}else{score-=15;reasons.push('O conjunto pode estar casual demais para um evento formal. Considere camisa, calça de alfaiataria e sapato social.');}}else if(level==='Casual'){if(informal>0){score+=8;reasons.push('As peças têm perfil compatível com uma ocasião casual.');}}else if(level==='Não sei / preciso de ajuda'){reasons.push('Confirme o dress code com o organizador antes de decidir.');}else{score+=5;reasons.push('Verifique se o evento exige algum detalhe específico de vestimenta.');}if(c.weather){if(c.weather.max>=29&&pieces.some(x=>/Casaco|Jaqueta/.test(x.category))){score-=5;reasons.push('A previsão indica calor; avalie retirar a sobreposição.');}if(c.weather.min<=15&&pieces.some(x=>['Camiseta / Blusa'].includes(x.category))){reasons.push('Considere uma camada extra para o período mais frio.');}if(c.weather.rain>=50){reasons.push('Há chance de chuva: pense em calçado adequado e uma camada resistente à água.');}}else reasons.push('Clima ainda não consultado: a avaliação de conforto climático está incompleta.');if(c.place==='Shopping'&&c.occasion==='Evento especial')reasons.push('Shopping não define sozinho o dress code: a ocasião especial e as regras do evento prevalecem.');score=Math.max(35,Math.min(98,score));let status=score>=85?'Boa compatibilidade':score>=65?'Atenção a alguns detalhes':'Revise o conjunto';let color=score>=85?'success':score>=65?'warning':'bad';let box=$('comboResult');box.innerHTML='<div class="score">'+score+'<span style="font-size:17px">/100</span></div><b>'+status+'</b><div class="meter"><span style="width:'+score+'%"></span></div>'+reasons.map(r=>'<div class="result-row"><span>• '+r+'</span></div>').join('')+'<div class="notice '+color+'" style="margin-top:12px">Pré-avaliação baseada nas categorias e estilos cadastrados. A pontuação não substitui a leitura da foto nem a confirmação do dress code real.</div><button class="btn primary" id="saveThisLook" style="width:100%;margin-top:12px">♡ Salvar este look</button>';let save=$('saveThisLook');save.onclick=()=>{
+  state.saved.unshift({id:(Date.now().toString(36)+Math.random().toString(36).slice(2,7)),pieces:pieces.map(p=>({...p})),score,status,context:c.place+' · '+c.occasion});
+  renderSaved();
+  updateStats();
+
+  // Limpa a montagem atual sem mexer no closet nem nos favoritos.
+  ['topPiece','bottomPiece','shoePiece','accessoryPiece'].forEach(id=>$(id).value='');
+  frozenPieces={top:false,bottom:false,shoes:false};renderBuilder();renderMannequin();
+  $('comboResult').innerHTML='<div class="notice success">♥ Match salvo nos seus favoritos! A seleção foi limpa e já está pronta para montar outro look.</div>';
+
+  // Também reinicia o envio de foto do look completo para uma nova avaliação.
+  $('fullLookPhoto').value='';
+  $('fullLookPreview').src='';
+  $('fullLookPreview').style.display='none';
+};};
+function renderSaved(){
+  let box=$('savedList');
+  box.innerHTML='';
+  if(!state.saved.length){
+    box.innerHTML='<div class="empty">Seus looks favoritos aparecerão aqui. Quando você salvar uma combinação, a composição completa ficará visível neste espaço. 💙</div>';
+    return;
+  }
+  state.saved.forEach((l,index)=>{
+    let el=document.createElement('article');
+    el.className='saved-look';
+
+    let head=document.createElement('div');
+    head.className='saved-look-head';
+
+    let title=document.createElement('div');
+    title.className='saved-look-title';
+
+    let name=document.createElement('b');
+    name.textContent=l.pieces.map(p=>p.name).join(' · ');
+
+    let sub=document.createElement('div');
+    sub.className='small muted';
+    sub.textContent=(l.context||'Look salvo')+' · '+l.score+'/100 · '+(l.status||'Favorito');
+
+    title.append(name,sub);
+
+    let remove=document.createElement('button');
+    remove.className='saved-remove';
+    remove.type='button';
+    remove.textContent='♥ Desfavoritar';
+    remove.setAttribute('aria-label','Desfavoritar este look');
+    remove.onclick=()=>{
+      state.saved.splice(index,1);
+      renderSaved();
+      updateStats();
+    };
+
+    head.append(title,remove);
+
+    let preview=document.createElement('div');
+    preview.className='saved-look-preview';
+    l.pieces.forEach(p=>{
+      let tile=document.createElement('div');
+      tile.className='saved-piece';
+      if(p.photo){
+        let img=document.createElement('img');
+        img.src=p.photo;
+        img.alt=p.name;
+        img.loading='lazy';
+        tile.append(img);
+      }else{
+        let fallback=document.createElement('span');
+        fallback.className='fallback';
+        fallback.textContent=emojis[p.category]||'👕';
+        fallback.title=p.name+' (sem foto cadastrada)';
+        tile.append(fallback);
+      }
+      preview.append(tile);
+    });
+
+    el.append(head,preview);
+    box.append(el);
+  });
+}
+
+$('eventDate').value=new Date().toISOString().slice(0,10);saveContext();renderCloset();renderSelects();updateStats();renderSaved();
+})();
+</script>
+</body>
+</html>
